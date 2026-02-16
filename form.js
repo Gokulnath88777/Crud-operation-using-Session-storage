@@ -1,5 +1,9 @@
 const userName=document.getElementById("name")
-const errorMsg=document.querySelectorAll(".errorMsg")
+const phone=document.getElementById("phone")
+const email=document.getElementById("email")
+const p1=document.getElementById("errorMsg1")
+const p2=document.getElementById("errorMsg2")
+const p3=document.getElementById("errorMsg3")
 const form=document.getElementById("form")
 const display=document.getElementById("display")
 const detailDisp=document.getElementById("detailShow")
@@ -19,88 +23,80 @@ let isPhone=false
 let isEmail=false
 let isName=false
 
-function userNameCheck()
+function formCheck()
 {
     if(userName.value)
     {
 
     
-    if(!userNameReges.test(userName.value.trim()))
-    {
-        errorMsg[0].style.visibility="visible"
-        errorMsg[0].textContent="The user Name is invalid"
-        isName=false
+        if(!userNameReges.test(userName.value.trim()))
+        {
+        p1.style.visibility="visible"
+        p1.textContent="The user Name is invalid"
+            isName=false
+        }
+        else
+        {
+            p1.style.visibility="hidden"
+            p1.textContent=""
+            isName=true
+        }
     }
     else
     {
-        errorMsg[0].style.visibility="hidden"
-        errorMsg[0].textContent=""
-        isName=true
-    }
-    }
-    else
-    {
-        errorMsg[0].style.visibility="visible"
-        errorMsg[0].textContent="The Field is Empty"
+        p1.style.visibility="visible"
+        p1.textContent="The Field is Empty"
         isName=false
     }
-}
 
 let phone=document.getElementById("phone")
 let phoneRegex=/^[6-9]\d{9}$/
-
-function phoneCheck()
-{
     if(phone.value)
+        {
+            if(!phoneRegex.test(phone.value.trim()))
+            {
+                p2.style.visibility="visible";
+                p2.textContent="The Phone Number is invalid"
+                isPhone=false
+            }
+            else{
+                p2.style.visibility="hidden";
+                p2.textContent=""
+                isPhone=true
+                
+            }
+
+         }
+    else
     {
-    if(!phoneRegex.test(phone.value.trim()))
-    {
-        errorMsg[1].style.visibility="visible";
-        errorMsg[1].textContent="The Phone Number is invalid"
+        p2.style.visibility="visible"
+        p2.textContent="The Field is Empty"
         isPhone=false
     }
-    else{
-        errorMsg[1].style.visibility="hidden";
-        errorMsg[1].textContent=""
-        isPhone=true
-        
-    }
-
-}
-else
-{
-    errorMsg[1].style.visibility="visible"
-    errorMsg[1].textContent="The Field is Empty"
-    isPhone=false
-}
-
-}
 let email=document.getElementById("email")
 emailRegex=/^[a-zA-Z0-9.+_]+\@gmail\.com$/
 
-function emailCheck()
-{
    if(email.value)
    {
     if(!emailRegex.test(email.value.trim()))
     {
-        errorMsg[2].style.visibility="visible"
-        errorMsg[2].textContent="The email is invalid"
+        p3.style.visibility="visible"
+        p3.textContent="The email is invalid"
         isEmail=false
     }
     else
     {
-        errorMsg[2].style.visibility="hidden"
-        errorMsg[2].textContent=""
+        p3.style.visibility="hidden"
+        p3.textContent=""
         isEmail=true
     }
-}
-else
-{
-    errorMsg[2].style.visibility="visible"
-    errorMsg[2].textContent="The Field is Empty"
-    isEmail=false
-}
+   }
+    else
+    {
+        p3.style.visibility="visible"
+        p3.textContent="The Field is Empty"
+        isEmail=false
+    }
 }
 
 function storeData()
@@ -138,7 +134,7 @@ function del()
         let index=userData.findIndex((userData)=>userData.userEmail==pTag[2].textContent)
         userData.splice(index,1)
         sessionStorage.setItem("users",JSON.stringify(userData))
-       displayDetails()
+        displayDetails()
     })
 })  
 }
@@ -231,10 +227,8 @@ updateClose.addEventListener("click",()=>
 })
 submitbtn.addEventListener("click",(event)=>
 {
-    event.preventDefault()
-    userNameCheck()
-    phoneCheck()
-    emailCheck()
+    event.preventDefault()   
+    formCheck()
     storeData()
  
 })
