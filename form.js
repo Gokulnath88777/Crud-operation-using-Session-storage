@@ -31,9 +31,8 @@ function formCheck()
     
         if(!userNameReges.test(userName.value.trim()))
         {
-        p1.style.visibility="visible"
         p1.textContent="The user Name is invalid"
-            isName=false
+        isName=false
         }
         else
         {
@@ -44,7 +43,6 @@ function formCheck()
     }
     else
     {
-        p1.style.visibility="visible"
         p1.textContent="The Field is Empty"
         isName=false
     }
@@ -55,7 +53,6 @@ let phoneRegex=/^[6-9]\d{9}$/
         {
             if(!phoneRegex.test(phone.value.trim()))
             {
-                p2.style.visibility="visible";
                 p2.textContent="The Phone Number is invalid"
                 isPhone=false
             }
